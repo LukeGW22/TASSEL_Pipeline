@@ -1,0 +1,60 @@
+# =============================================================================
+# TXBM21-26 .gitignore
+# =============================================================================
+
+# ----- macOS Metadata (never track) -----
+.DS_Store
+._.DS_Store
+._*
+.AppleDouble
+.LSOverride
+
+# ----- Large Data Files (never track) -----
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bam.bai
+*.sam
+*.vcf
+*.vcf.gz
+*.vcf.gz.csi
+*.vcf.gz.tbi
+*.bcf
+*.h5
+*.hdf5
+
+# ----- Data Directories -----
+Data/
+Results/
+PolyA_FASTQ/
+
+# ----- SLURM Job Outputs -----
+*.stdout
+*.stderr
+slurm-*.out
+*.out.[0-9]*
+*.err.[0-9]*
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+
+# ----- Marimo session cache -----
+__marimo__/
+
+# ----- OS/Editor -----
+*.swp
+*.swo
+*~
+.vscode/
+
+# ----- Temporary/Intermediate Files -----
+*.tmp
+*.temp
+*.log
