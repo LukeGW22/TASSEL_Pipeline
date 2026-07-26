@@ -1,32 +1,56 @@
 #!/bin/bash
+#===============================================================================
+# SLURM Launch Script: TXBM21-26 TASSEL GBS SNP Calling
+#
+# Submit from Grace:
+#   sbatch Call_SNPs_launch.sh
+#
+# NOTE: TASSEL_Workflow_Outputs/logs/ must exist before submitting.
+#   mkdir -p /scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs
+#===============================================================================
 
 #SBATCH --export=NONE
-#SBATCH --job-name=PolyA-21-25_Call_SNPs
-#SBATCH --time=10:30:00
+#SBATCH --job-name=TXBM21-26_Call_SNPs
+#SBATCH --time=24:00:00
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=48
+#SBATCH --cpus-per-task=24
 #SBATCH --mem=250GB
-#SBATCH --output=stdout.%x.%j
-#SBATCH --error=stderr.%x.%j
+#SBATCH --output=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.out
+#SBATCH --error=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.err
 #SBATCH --account=132740983644
 #SBATCH --mail-user=luke.whiteley@ag.tamu.edu
-#SBATCH --mail-type=all
+#SBATCH --mail-type=ALL
+
+#-------------------------------------------------------------------------------
+# Environment Setup
+#-------------------------------------------------------------------------------
 
 module purge
 module load Anaconda3/2024.02-1
 module load GCCcore/13.2.0
 module load BWA/0.7.18
-#module load bwa-mem2/2.2.1-Linux64     # a more efficient BWA algorithm
 
-# initialize conda
-source $(conda info --base)/etc/profile.d/conda.sh
-
-# activate TASSEL env
+# Initialize conda and activate TASSEL environment
+source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate TASSEL
 
-# navigate to project directory
-cd '/scratch/group/genomic_predict/SNP_Calling/TXBM21-25_AAA'
+#-------------------------------------------------------------------------------
+# Project Paths
+#-------------------------------------------------------------------------------
 
-# execute TASSEL workflow
-#bash TXBM19-25_Tassel5GBSv2_pipeline_Paulv3.sh
-nohup ./TXBM21-25_Tassel5GBSv2_pipeline_Paulv3.sh | tee -a TXBM21-25_Tassel5GBSv2_pipeline_Paulv3-log.txt
+PROJECT_ROOT="/scratch/group/genomic_predict/SNP_Calling/TXBM21-26"
+PIPELINE_SCRIPT="${PROJECT_ROOT}/Scripts/2_SNPCalling/TXBM21-26_TASSEL_GBS_Pipeline.sh"
+
+#-------------------------------------------------------------------------------
+# Run Pipeline
+#-------------------------------------------------------------------------------
+
+cd "${PROJECT_ROOT}"
+
+echo "Job started: $(date)"
+echo "Node: $(hostname)"
+echo "Running pipeline: ${PIPELINE_SCRIPT}"
+
+bash "${PIPELINE_SCRIPT}"
+
+echo "Job finished: $(date)"
