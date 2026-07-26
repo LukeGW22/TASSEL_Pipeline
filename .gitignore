@@ -22,6 +22,13 @@
 *.vcf.gz.csi
 *.vcf.gz.tbi
 *.bcf
+*.fa
+*.fa.gz
+*.tbi
+*.hmp.txt
+*.hmp.txt.gz
+*.db
+*.sai
 *.h5
 *.hdf5
 
