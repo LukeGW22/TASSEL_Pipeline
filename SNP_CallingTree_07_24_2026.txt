@@ -1,0 +1,872 @@
+.
+├── 18828370.stdout
+├── AddPolyA_launch.sh
+├── cleanup_snp_calling.sh
+├── GBS_Metadata
+│   ├── Current_Key
+│   │   └── TXBM21-26_KEY-20260724_210705.txt
+│   └── Current_Lines
+│       └── TXBM21-26_LINES-20260724_210705.txt
+├── GENOPT
+│   ├── 2295_genos
+│   │   ├── MLC30_MAF04
+│   │   │   ├── TASSEL_Logs
+│   │   │   │   ├── TXBM21-25_MLC30_MAF04_FILT_IMP.log
+│   │   │   │   └── TXBM21-25_MLC30_MAF04.log
+│   │   │   ├── TASSEL_Summaries
+│   │   │   │   └── < 4 × TXBM21-25_MLC30_MAF04N.txt summary files >
+│   │   │   └── VCF
+│   │   │       ├── TXBM21-25_MLC30_MAF04_filtered.vcf
+│   │   │       ├── TXBM21-25_MLC30_MAF04_IMPUTED.log
+│   │   │       └── TXBM21-25_MLC30_MAF04_IMPUTED.vcf.gz
+│   │   ├── MLC40_MAF02
+│   │   │   ├── TASSEL_Logs
+│   │   │   │   ├── TXBM21-25_MLC40_MAF02_FILT_IMP.log
+│   │   │   │   └── TXBM21-25_MLC40_MAF02.log
+│   │   │   ├── TASSEL_Summaries
+│   │   │   │   └── < 4 × TXBM21-25_MLC40_MAF02N.txt summary files >
+│   │   │   └── VCF
+│   │   │       ├── TXBM21-25_MLC40_MAF02_filtered.vcf
+│   │   │       ├── TXBM21-25_MLC40_MAF02_IMPUTED.log
+│   │   │       └── TXBM21-25_MLC40_MAF02_IMPUTED.vcf.gz
+│   │   ├── < 5 error files >
+│   │   ├── < 5 stdout files >
+│   │   └── TXBM21-25_AAA_productioHapMap_noKO.h5
+│   ├── bcftool_stats
+│   │   ├── bcftools_stats
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED_plots
+│   │   │   │   └── < 7 files: .dat, .log, .png, .py >
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED.stats.txt
+│   │   │   ├── TXBM21-25_MLC30_MAF04_IMPUTED_plots
+│   │   │   │   └── < 7 files: .dat, .log, .png, .py >
+│   │   │   ├── TXBM21-25_MLC30_MAF04_IMPUTED.stats.txt
+│   │   │   ├── TXBM21-25_MLC40_MAF02_IMPUTED_plots
+│   │   │   │   └── < 7 files: .dat, .log, .png, .py >
+│   │   │   └── TXBM21-25_MLC40_MAF02_IMPUTED.stats.txt
+│   │   ├── BCFtoolsStats-2.sh
+│   │   ├── chromosomes.txt
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   ├── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED.vcf.gz
+│   │   ├── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED.vcf.gz.csi
+│   │   ├── TXBM21-25_MLC30_MAF04_IMPUTED.vcf.gz
+│   │   ├── TXBM21-25_MLC30_MAF04_IMPUTED.vcf.gz.csi
+│   │   ├── TXBM21-25_MLC40_MAF02_IMPUTED.vcf.gz
+│   │   └── TXBM21-25_MLC40_MAF02_IMPUTED.vcf.gz.csi
+│   ├── FAST_TXBM21-25.05geno_miss.h5
+│   ├── Filter-Impute.sh
+│   ├── Impute-LDPrune-v2.sh
+│   ├── MLC20_MAF01_old
+│   │   ├── PLINK
+│   │   │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.log
+│   │   │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.pgen
+│   │   │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.prune.in
+│   │   │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.prune.out
+│   │   │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.psam
+│   │   │   └── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.pvar
+│   │   └── VCF
+│   │       ├── numeric_head10.txt
+│   │       ├── NUMERIC-Pruned_TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.txt
+│   │       ├── Pruned_TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.log
+│   │       ├── Pruned_TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.vcf.gz
+│   │       ├── QC1-bcftools-v2.sh
+├── < 2 stderr.*.JOBID files >
+└── < 2 stdout.*.JOBID files >
+│   │       ├── toNumeric.sh
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151.bgz.vcf.gz
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151.bgz.vcf.gz.csi
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.log
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151-IMPUTED.vcf.gz
+│   │       └── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151.vcf.gz
+│   ├── MLC20_MAF02_CORRECT
+│   │   ├── TASSEL_Logs
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT_FILT_IMP.log
+│   │   │   └── TXBM21-25_MLC20_MAF02_CORRECT.log
+│   │   ├── TASSEL_Summaries
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT1.txt
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT2.txt
+│   │   │   ├── TXBM21-25_MLC20_MAF02_CORRECT3.txt
+│   │   │   └── TXBM21-25_MLC20_MAF02_CORRECT4.txt
+│   │   └── VCF
+│   │       ├── TXBM21-25_MLC20_MAF02_CORRECT_filtered.vcf
+│   │       ├── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED.log
+│   │       └── TXBM21-25_MLC20_MAF02_CORRECT_IMPUTED.vcf.gz
+│   ├── MLC30_MAF04
+│   │   ├── TASSEL_Logs
+│   │   │   ├── TXBM21-25_MLC30_MAF04_FILT_IMP.log
+│   │   │   └── TXBM21-25_MLC30_MAF04.log
+│   │   ├── TASSEL_Summaries
+│   │   │   └── < 4 × TXBM21-25_MLC30_MAF04N.txt summary files >
+│   │   └── VCF
+│   │       ├── TXBM21-25_MLC30_MAF04_filtered.vcf
+│   │       ├── TXBM21-25_MLC30_MAF04_IMPUTED.log
+│   │       └── TXBM21-25_MLC30_MAF04_IMPUTED.vcf.gz
+│   ├── MLC40_MAF02
+│   │   ├── TASSEL_Logs
+│   │   │   ├── TXBM21-25_MLC40_MAF02_FILT_IMP.log
+│   │   │   └── TXBM21-25_MLC40_MAF02.log
+│   │   ├── TASSEL_Summaries
+│   │   │   └── < 4 × TXBM21-25_MLC40_MAF02N.txt summary files >
+│   │   └── VCF
+│   │       ├── TXBM21-25_MLC40_MAF02_filtered.vcf
+│   │       ├── TXBM21-25_MLC40_MAF02_IMPUTED.log
+│   │       └── TXBM21-25_MLC40_MAF02_IMPUTED.vcf.gz
+│   ├── Old_Jobs
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   ├── POP_STRUCT
+│   │   ├── getADMIX_CVError.sh
+│   │   ├── INPUT_VCF
+│   │   │   ├── TXBM21-25_MLC40_MAF02_IMPUTED.vcf.gz
+│   │   │   ├── USE-TXBM21-25_MLC20_MAF02.vcf.gz
+│   │   │   └── USE-TXBM21-25_MLC30_MAF04_IMPUTED.vcf.gz
+│   │   ├── MLC20_MAF02_K2-30
+│   │   │   ├── ADMIX_LOGS
+│   │   │   │   ├── getADMIX_CVError.sh
+│   │   │   │   ├── MLC20_MAF02_CV_errors.tsv
+│   │   │   │   └── < K2-K30 × 5 seeds: 150 .log files >
+│   │   │   ├── ADMIX_RESULTS
+│   │   │   │   ├── < 145 × .admix.P files (K2-K30 × 5 seeds) >
+│   │   │   │   └── < 145 × .admix.Q files (K2-K30 × 5 seeds) >
+│   │   │   ├── MLC20_MAF02.bed
+│   │   │   ├── MLC20_MAF02.bim
+│   │   │   ├── MLC20_MAF02.fam
+│   │   │   ├── MLC20_MAF02.log
+│   │   │   ├── MLC20_MAF02.nosex
+│   │   │   ├── MLC20_MAF02.prune.log
+│   │   │   ├── MLC20_MAF02.prune.nosex
+│   │   │   ├── MLC20_MAF02.prune.prune.in
+│   │   │   ├── MLC20_MAF02.prune.prune.out
+│   │   │   ├── MLC20_MAF02.raw.bed
+│   │   │   ├── MLC20_MAF02.raw.bim
+│   │   │   ├── MLC20_MAF02.raw.fam
+│   │   │   ├── MLC20_MAF02.raw.log
+│   │   │   ├── MLC20_MAF02.raw.nosex
+│   │   │   ├── PLINK-PCA_PoCA.sh
+│   │   │   ├── PLINK_RESULTS
+│   │   │   │   ├── MLC20_MAF02.pca.eigenval
+│   │   │   │   ├── MLC20_MAF02.pca.eigenvec
+│   │   │   │   ├── MLC20_MAF02.pca.log
+│   │   │   │   ├── MLC20_MAF02.pca.nosex
+│   │   │   │   ├── MLC20_MAF02.pruned.bed
+│   │   │   │   ├── MLC20_MAF02.pruned.bim
+│   │   │   │   ├── MLC20_MAF02.pruned.fam
+│   │   │   │   ├── MLC20_MAF02.pruned.log
+│   │   │   │   └── MLC20_MAF02.pruned.nosex
+│   │   │   ├── RunAdmix-5.sh
+├── < 2 stderr.*.JOBID files >
+├── < 1 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 1 more stdout files >
+│   │   ├── MLC20_MAF02_K2-8
+│   │   │   ├── MLC20_MAF02.admix.2.P
+│   │   │   ├── MLC20_MAF02.admix.2.Q
+│   │   │   ├── MLC20_MAF02.admix.3.P
+│   │   │   ├── MLC20_MAF02.admix.3.Q
+│   │   │   ├── MLC20_MAF02.admix.4.P
+│   │   │   ├── MLC20_MAF02.admix.4.Q
+│   │   │   ├── MLC20_MAF02.admix.5.P
+│   │   │   ├── MLC20_MAF02.admix.5.Q
+│   │   │   ├── MLC20_MAF02.admix.6.P
+│   │   │   ├── MLC20_MAF02.admix.6.Q
+│   │   │   ├── MLC20_MAF02.admix.7.P
+│   │   │   ├── MLC20_MAF02.admix.7.Q
+│   │   │   ├── MLC20_MAF02.admix.8.P
+│   │   │   ├── MLC20_MAF02.admix.8.Q
+│   │   │   ├── MLC20_MAF02.admix.bed
+│   │   │   ├── MLC20_MAF02.admix.bim
+│   │   │   ├── MLC20_MAF02.admix.fam
+│   │   │   ├── MLC20_MAF02.bed
+│   │   │   ├── MLC20_MAF02.bim
+│   │   │   ├── MLC20_MAF02.fam
+│   │   │   ├── MLC20_MAF02.K2.log
+│   │   │   ├── MLC20_MAF02.K3.log
+│   │   │   ├── MLC20_MAF02.K4.log
+│   │   │   ├── MLC20_MAF02.K5.log
+│   │   │   ├── MLC20_MAF02.K6.log
+│   │   │   ├── MLC20_MAF02.K7.log
+│   │   │   ├── MLC20_MAF02.K8.log
+│   │   │   ├── MLC20_MAF02.log
+│   │   │   ├── MLC20_MAF02.nosex
+│   │   │   ├── MLC20_MAF02.prune.log
+│   │   │   ├── MLC20_MAF02.prune.nosex
+│   │   │   ├── MLC20_MAF02.prune.prune.in
+│   │   │   ├── MLC20_MAF02.prune.prune.out
+│   │   │   ├── MLC20_MAF02.raw.bed
+│   │   │   ├── MLC20_MAF02.raw.bim
+│   │   │   ├── MLC20_MAF02.raw.fam
+│   │   │   ├── MLC20_MAF02.raw.log
+│   │   │   ├── MLC20_MAF02.raw.nosex
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   ├── MLC30_MAF04_K2-30
+│   │   │   ├── ADMIX_LOGS
+│   │   │   │   ├── getADMIX_CVError.sh
+│   │   │   │   ├── MLC30_MAF04_CV_errors.tsv
+│   │   │   │   └── < K2-K30 × 5 seeds: 150 .log files >
+│   │   │   ├── ADMIX_RESULTS
+│   │   │   │   ├── < 145 × .admix.P files (K2-K30 × 5 seeds) >
+│   │   │   │   └── < 145 × .admix.Q files (K2-K30 × 5 seeds) >
+│   │   │   ├── MLC30_MAF04.bed
+│   │   │   ├── MLC30_MAF04.bim
+│   │   │   ├── MLC30_MAF04.fam
+│   │   │   ├── MLC30_MAF04.log
+│   │   │   ├── MLC30_MAF04.nosex
+│   │   │   ├── MLC30_MAF04.prune.log
+│   │   │   ├── MLC30_MAF04.prune.nosex
+│   │   │   ├── MLC30_MAF04.prune.prune.in
+│   │   │   ├── MLC30_MAF04.prune.prune.out
+│   │   │   ├── MLC30_MAF04.raw.bed
+│   │   │   ├── MLC30_MAF04.raw.bim
+│   │   │   ├── MLC30_MAF04.raw.fam
+│   │   │   ├── MLC30_MAF04.raw.log
+│   │   │   ├── MLC30_MAF04.raw.nosex
+│   │   │   ├── RunAdmix-5.sh
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   ├── ProcessAdmix.sh
+│   │   ├── RunAdmix-3.sh
+│   │   ├── RunAdmix-4.sh
+│   │   ├── RunAdmix-5.sh
+│   │   └── TXBM21-25
+│   │       ├── MLC20_MAF02_CV_errors.tsv
+│   │       ├── MLC20_MAF02_for_CLUMPAK
+│   │       │   └── < MLC20_MAF02.K2-K30 (29 dirs, 5 .admix.Q per dir) >
+│   │       ├── MLC20_MAF02_for_CLUMPAK.zip
+│   │       ├── MLC30_MAF04_CV_errors.tsv
+│   │       ├── MLC30_MAF04_for_CLUMPAK
+│   │       │   └── < MLC30_MAF04.K2-K30 (29 dirs, 5 .admix.Q per dir) >
+│   │       └── MLC30_MAF04_for_CLUMPAK.zip
+│   ├── Software
+│   │   ├── admixture_linux-1.3.1
+│   │   │   ├── admixture
+│   │   │   ├── admixture32
+│   │   │   ├── admixture-manual.pdf
+│   │   │   └── README.32.txt
+│   │   ├── admixture_linux-1.3.1.tar.gz
+│   │   ├── < 1 .jar library files >
+│   │   ├── distruct1.1.tar.gz
+│   │   ├── frontend
+│   │   │   ├── bin
+│   │   │   │   └── structure
+│   │   │   ├── class
+│   │   │   │   ├── < 1 .jar library files >
+│   │   │   ├── doc
+│   │   │   │   └── structure_doc.pdf
+│   │   │   ├── images
+│   │   │   │   └── < 15 UI image files (.gif, .jpeg) >
+│   │   │   ├── install
+│   │   │   ├── library
+│   │   │   │   └── neighbor
+│   │   │   │       ├── COPYRIGHT
+│   │   │   │       ├── font1
+│   │   │   │       ├── fontfile
+│   │   │   │       ├── neighbor
+│   │   │   │       ├── NOTE
+│   │   │   │       └── plots
+│   │   │   │           ├── infile
+│   │   │   │           ├── intree
+│   │   │   │           ├── outfile
+│   │   │   │           └── test-parameter-set_run_4_f
+│   │   │   ├── readme
+│   │   │   └── sample
+│   │   │       ├── sample_data
+│   │   │       └── sample_parameters
+│   │   └── structure_linux_frontend.tar.gz
+├── < 2 stderr.*.JOBID files >
+├── < 2 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 2 more stdout files >
+├── PolyA_FASTQ
+│   ├── AAAA-TX2021-TXE-AP-AA-STA-GBS_1_1.fastq
+│   ├── AAAA-TX2021-TXE-AP-AA-STA-GBS_2_1.fastq
+│   ├── AAAA-TXL2022-GBS-P1-4-S1_1_1.fastq
+│   ├── AAAA-TXL2023-BL-Plates1-4-GBS-S1_1_1.fastq
+│   ├── AAAA-TXL2024-1to4-GBS-S1_1_1.fastq
+│   ├── AAAA-TXL2024-5to7-and-SDS-1-GBS-S1_1_1.fastq
+│   ├── AAAA-TXL2025GBS_1_1.fastq
+│   └── AAAA-TXL2025RPNGBS-J615_1_1.fastq
+├── PolyA_FASTQ_TXBM21-25.tar.gz
+├── Raw_genomic_data
+│   ├── 2018-2020
+│   │   ├── 2018-2020_raw.tar.gz
+│   │   └── raw files
+│   │       ├── agseq_filtered_MaxMissing0.5_MinMAF0.05.vcf
+│   │       ├── ddRAdseqTAMUlineTXEAAAP2018_2019_2020.xlsx
+│   │       ├── download.txgen.tamu.edu_19382Liu_3562019-20TXEAAAP.pdf
+│   │       ├── fastqc_19382Liu_N20059_L001.zip
+│   │       ├── SampleSheet_19382Liu_N20059_L001.csv
+│   │       └── test
+│   │           └── Untitled Document 2
+│   ├── Breeding_Lines
+│   │   ├── FASTQ
+│   │   │   ├── AAAA-TXR2026GBS_1_1.fastq
+│   │   │   ├── TX2021-TXE-AP-AA-STA-GBS_1_1.fastq.gz
+│   │   │   ├── TX2021-TXE-AP-AA-STA-GBS_2_1.fastq.gz
+│   │   │   ├── TXL2022-GBS-P1-4-S1_1_1.fastq.gz
+│   │   │   ├── TXL2023-BL-Plates1-4-GBS-S1_1_1.fastq.gz
+│   │   │   ├── TXL2024-1to4-GBS-S1_1_1.fastq.gz
+│   │   │   ├── TXL2024-5to7-and-SDS-1-GBS-S1_1_1.fastq.gz
+│   │   │   ├── TXL2025GBS_1_1.fastq.gz
+│   │   │   ├── TXL2025RPNGBS-J615_1_1.fastq.gz
+│   │   │   └── TXR2026GBS_1_1.fastq.gz
+│   │   ├── KEYS
+│   │   │   ├── TX2021-TXE-AP-AA-STA-GBS-KEY.txt
+│   │   │   ├── TXBM2023-GBS-KEY.txt
+│   │   │   ├── TXBM21-25-PolyA-KEY.txt
+│   │   │   ├── TXL2022_GBS-KEY.txt
+│   │   │   ├── TXL2025RPNGBS-J615-KEY.txt
+│   │   │   └── TXR2026GBS-KEY.txt
+│   │   └── LINES
+│   │       ├── TXBM21-25-LINES-3.txt
+│   │       └── TXR2026GBS-LINES.txt
+│   ├── GeneticPops
+│   │   └── T44
+│   │       ├── T44key.txt
+│   │       ├── T44_TXL2023-DHL1-3_and_SDS2023-9_GBS_S1_L001_R1_001.fastq.gz
+│   │       └── T44_TXL_GBS DNA Sample list and barcodes.xlsx
+│   └── TX2025GBS
+│       ├── hapmap
+│       │   ├── CleanupAtAllMLCLevels.out
+│       │   ├── FilterAtAllMLCLevels.out
+│       │   ├── HapmapFilter.log.txt
+│       │   ├── HapmapFilter.sh
+│       │   ├── HeatmapAtAllMLCLevels.out
+│       │   ├── ImputeAtAllMLCLevels.out
+│       │   ├── Initial_GBS_Stats.txt
+│       │   ├── Initial_Marker_Counts_Per_Chrom.txt
+│       │   ├── -lht
+│       │   ├── markers.bed.gz
+│       │   ├── markerSeqs.fa.gz
+│       │   ├── TXL2025GBS_1_1.fastq.gz
+│       │   ├── TXL2025GBS2.json.gz
+│       │   ├── TXL2025GBS.GenotypesTable.tab.gz
+│       │   ├── TXL2025GBS.hmp.txt.gz
+│       │   ├── TXL2025GBS.orig.All_Depths.gdepth
+│       │   ├── TXL2025GBS.orig.frq
+│       │   ├── TXL2025GBS.orig.ind_depth.txt
+│       │   ├── TXL2025GBS.orig.site_depth.ldepth
+│       │   ├── TXL2025GBS.vcf.gz
+│       │   └── TXL2025GBS.vcf.idx
+│       ├── NOTES on TXL2025 GBS, job 594.txt
+│       ├── TXL2025GBS job594
+│       │   └── hapmap
+│       │       └── FilteredMLC20
+│       │           └── Marker_Density.TXL2025GBS.FilteredMLC20.hmp.pdf
+│       ├── TXL2025 GBS, job 594.xlsx
+│       ├── TXL2025_RPN_Parents_GBS-job_615
+│       │   ├── ADD_TXL2025RPNGBS-J615.sh
+│       │   ├── GBS-J615
+│       │   │   ├── hapmap
+│       │   │   │   ├── CleanupAtAllMLCLevels.out
+│       │   │   │   ├── FilterAtAllMLCLevels.out
+│       │   │   │   ├── FilteredMLC50
+│       │   │   │   │   ├── Imputed
+│       │   │   │   │   │   ├── TXL2025RPNGBS-J615.Filtered.bi.MLC50.imputed.FromVCF.hmp.txt.gz
+│       │   │   │   │   │   └── TXL2025RPNGBS-J615.Filtered.bi.MLC50.imputed.vcf.gz
+│       │   │   │   │   ├── Marker_Density.TXL2025RPNGBS-J615.FilteredMLC50.hmp.pdf
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.Filtered.bi.MLC50.recode.FromVCF.hmp-GBSTagStats.txt
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.Filtered.bi.MLC50.recode.FromVCF.hmp-MarkersPerChrom.txt
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.Filtered.bi.MLC50.recode.FromVCF.hmp.txt.gz
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.Filtered.bi.MLC50.recode.vcf.gz
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.MLC50.All_Depths.gdepth.gz
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.MLC50.frq
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.MLC50.ind_depth.txt
+│       │   │   │   │   ├── TXL2025RPNGBS-J615.MLC50.site_depth.ldepth
+│       │   │   │   │   └── TXL2025RPNGBS-J615.MLC50.site_depth.ldepth.mean
+│       │   │   │   ├── HapmapFilter.sh
+│       │   │   │   ├── markerSeqs.fa.gz
+│       │   │   │   ├── TXL2025RPNGBS-J6152.json.gz
+│       │   │   │   ├── TXL2025RPNGBS-J615.orig.All_Depths.gdepth.gz
+│       │   │   │   └── TXL2025RPNGBS-J615.vcf.idx
+│       │   │   ├── Run160-Demultiplex_Stats.csv
+│       │   │   ├── Run160-fastq_list.csv
+│       │   │   ├── Run160-SampleSheet.csv
+│       │   │   ├── Tassel5GBSv2_pipeline_Paulv3-log.txt
+│       │   │   ├── Tassel5GBSv2_pipeline_Paulv3.sh
+│       │   │   ├── TXL2025RPNGBS-J615_1_1.fastq.gz
+│       │   │   ├── TXL2025RPNGBS-J615-KEY.txt
+│       │   │   └── TXL2025RPNGBS-J615-LINES.txt
+│       │   ├── NOTES on TXL2025-RPN and KSB_BC and run info, job 615.txt
+│       │   ├── old
+│       │   │   ├── GBS-J615
+│       │   │   │   ├── Run160-Demultiplex_Stats.csv
+│       │   │   │   ├── Run160-fastq_list.csv
+│       │   │   │   ├── Run160-SampleSheet.csv
+│       │   │   │   └── TXL2025RPNGBS-J615_1_1.fastq.gz
+│       │   │   └── TXL2025RPNGBS-J615
+│       │   └── TXL2025RPNGBS-J615.zip
+│       └── Unzip_FASTQ.py
+├── scratch
+│   └── group
+│       └── genomic_predict
+│           └── SNP_Calling
+│               └── TXBM21-25_AAA
+│                   └── PolyA_FASTQ
+│                       └── AAAA-TX2021-TXE-AP-AA-STA-GBS_2_1.fastq
+├── SNP_CallingTree_07_24_2026.txt
+├── Software
+│   ├── admixture_linux-1.3.1
+│   │   ├── admixture
+│   │   ├── admixture32
+│   │   ├── admixture-manual.pdf
+│   │   └── README.32.txt
+│   ├── admixture_linux-1.3.1.tar.gz
+│   ├── < 1 .jar library files >
+│   ├── distruct1.1.tar.gz
+│   ├── frontend
+│   │   ├── bin
+│   │   │   └── structure
+│   │   ├── class
+│   │   │   ├── < 1 .jar library files >
+│   │   ├── doc
+│   │   │   └── structure_doc.pdf
+│   │   ├── images
+│   │   │   └── < 15 UI image files (.gif, .jpeg) >
+│   │   ├── install
+│   │   ├── library
+│   │   │   └── neighbor
+│   │   │       ├── COPYRIGHT
+│   │   │       ├── font1
+│   │   │       ├── fontfile
+│   │   │       ├── neighbor
+│   │   │       ├── NOTE
+│   │   │       └── plots
+│   │   │           ├── infile
+│   │   │           ├── intree
+│   │   │           ├── outfile
+│   │   │           └── test-parameter-set_run_4_f
+│   │   ├── readme
+│   │   └── sample
+│   │       ├── sample_data
+│   │       └── sample_parameters
+│   ├── structure_linux_frontend.tar.gz
+│   └── tassel-5-standalone
+│       ├── cp.bat
+│       ├── example_pipelines
+│       │   ├── glm_tutorial_config.xml
+│       │   ├── ld_all_config.xml
+│       │   ├── ld_site_by_all_config.xml
+│       │   └── mlm_tutorial_config.xml
+│       ├── lib
+│       │   ├── < 51 .jar library files >
+│       │   ├── enzymes.ini
+│       │   ├── libTasselBlas.dylib
+│       ├── run_anything.bat
+│       ├── run_anything.pl
+│       ├── run_pipeline.bat
+│       ├── run_pipeline.pl
+│       ├── start_tassel.bat
+│       ├── start_tassel.pl
+│       ├── < 1 .jar library files >
+│       ├── Tassel5PipelineCLI.pdf
+│       └── TASSELTutorialData
+│           └── data
+│               ├── d8_sequence.phy
+│               ├── mdp_genotype.hmp.txt
+│               ├── mdp_kinship.txt
+│               ├── mdp_phenotype.txt
+│               ├── mdp_population_structure.txt
+│               └── mdp_traits.txt
+├── Successful_Pipelines
+│   └── RPN25_test.tar.gz
+├── TXBM19-25.tar.gz
+├── TXBM2024_run.tar.gz
+├── TXBM21-25
+│   ├── alignment
+│   │   ├── TXBM21-25_AlignedMasterTags.sai
+│   │   ├── TXBM21-25_AlignedMasterTags.sam
+│   │   └── TXBM21-25_MasterGBStags.fa.gz
+│   ├── Call_SNPs_launch.sh
+│   ├── database
+│   │   └── TXBM21-25.db
+│   ├── hapmap
+│   │   ├── filtering_scratch
+│   │   │   ├── CB26_renamed_samples_in_TXBM21-25.txt
+│   │   │   ├── CB26.txt
+│   │   │   ├── TXBM21-25.bi.MLC80.2049genos_list.txt
+│   │   │   └── TXBM21-25.filtered.bi.MLC80.2049genos_CB_common_names_list.txt
+│   │   ├── get_vcf_stats.sh
+│   │   ├── get_vcf_stats.sh.save
+│   │   ├── Imputation
+│   │   │   ├── < 1 .jar library files >
+│   │   │   ├── impute_SNPs.sh
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │   ├── TXBM21-25.filtered.bi.MLC20_for_imputation.vcf.gz
+│   │   │   ├── TXBM21-25.imputed.bi.MLC20.vcf.gz.log
+│   │   │   └── TXBM21-25.imputed.bi.MLC20.vcf.gz.vcf.gz
+│   │   ├── Logs
+├── < 2 stderr.*.JOBID files >
+├── < 2 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 2 more stdout files >
+│   │   ├── MLC20
+│   │   │   ├── pre-imputation_filter.sh
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │   ├── TXBM21-25_for_imputation_MLC20.vcf.gz
+│   │   │   └── TXBM21-25_for_imputation_MLC20.vcf.gz.csi
+│   │   ├── MLC_range
+├── < 2 stderr.*.JOBID files >
+├── < 1 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 1 more stdout files >
+│   │   │   ├── TXBM21-25_for_imputation_MLC05.vcf.gz
+│   │   │   ├── TXBM21-25_for_imputation_MLC05.vcf.gz.csi
+│   │   │   ├── TXBM21-25_for_imputation_MLC10.vcf.gz
+│   │   │   ├── TXBM21-25_for_imputation_MLC10.vcf.gz.csi
+│   │   │   ├── TXBM21-25_for_imputation_MLC50.vcf.gz
+│   │   │   └── TXBM21-25_for_imputation_MLC50.vcf.gz.csi
+│   │   ├── Pipeline_Output
+│   │   │   ├── TXBM21-251.hmp.txt
+│   │   │   ├── TXBM21-251.vcf
+│   │   │   └── TXBM21-252.json.gz
+│   │   ├── pre-imputation_filter-bcf.sh
+│   │   ├── pre-imputation_filter-vcf-no_names_dropped.sh
+│   │   ├── pre-imputation_filter-vcf.sh
+├── < 2 stderr.*.JOBID files >
+├── < 5 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 5 more stdout files >
+│   │   ├── TXBM21-25_0.9_geno_drop_list.txt
+│   │   ├── TXBM21-25.filtered.bi.MLC20.2049genos_for_imputation.vcf.gz
+│   │   ├── TXBM21-25.filtered.bi.MLC20_for_imputation.vcf.gz
+│   │   ├── TXBM21-25.filtered.bi.MLC50_for_imputation.vcf.gz
+│   │   ├── TXBM21-25-raw.vcf.gz
+│   │   ├── vcf_stats
+│   │   │   ├── TXBM21-25.filtered.bi.MLC20.2049genos_for_imputation-genotypes.txt
+│   │   │   ├── TXBM21-25.filtered.bi.MLC20.2049genos_for_imputation.stats
+│   │   │   ├── TXBM21-25.filtered.bi.MLC20_for_imputation-genotypes.txt
+│   │   │   ├── TXBM21-25.filtered.bi.MLC20_for_imputation.stats
+│   │   │   ├── TXBM21-25.filtered.bi.MLC50_for_imputation-genotypes.txt
+│   │   │   ├── TXBM21-25.filtered.bi.MLC50_for_imputation.stats
+│   │   │   ├── TXBM21-25-raw-genotypes.txt
+│   │   │   ├── TXBM21-25-raw.stats
+│   │   │   ├── vcftools-TXBM21-25.filtered.bi.MLC20_for_imputation-genotypes.txt
+│   │   │   └── vcftools-TXBM21-25.filtered.bi.MLC20_for_imputation.stats
+│   │   ├── VCFtools
+│   │   │   ├── Missing20
+│   │   │   │   ├── TXBM21-25.filtered.bi.MLC80.2049genos_for_imputation.vcf.gz
+│   │   │   │   ├── TXBM21-25.filtered.bi.MLC80.2295genos_for_imputation.vcf.gz
+│   │   │   │   └── vcf_stats
+│   │   │   │       ├── TXBM21-25.filtered.bi.MLC80.2049genos_for_imputation-genotypes.txt
+│   │   │   │       ├── TXBM21-25.filtered.bi.MLC80.2049genos_for_imputation.stats
+│   │   │   │       ├── TXBM21-25.filtered.bi.MLC80.2295genos_for_imputation-genotypes.txt
+│   │   │   │       └── TXBM21-25.filtered.bi.MLC80.2295genos_for_imputation.stats
+│   │   │   ├── Missing50
+│   │   │   └── Missing80
+│   │   │       ├── IMPORTANT_NOTE.txt
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │       ├── TXBM21-25.filtered.bi.MLC80.2295genos_for_imputation.vcf.gz
+│   │   │       └── vcftools-TXBM21-25.filtered.bi.MLC20_for_imputation.vcf.gz
+│   │   └── vcftools-TXBM21-25.filtered.bi.MLC20_for_imputation.vcf.gz
+│   ├── HDF5
+│   │   ├── TXBM21-25-KEY4_ReadsPerSample.log
+│   │   └── TXBM21-25_productioHapMap_noKO.h5
+│   ├── iwgsc_refseqv2.1_assembly.fa
+│   └── < 5 BWA index files (.fa.amb/ann/bwt/pac/sa) >
+│   ├── logs
+│   │   └── < 9 TASSEL GBS plugin .log files >
+│   ├── old
+│   │   ├── 02-02-2026
+│   │   │   ├── alignment
+│   │   │   │   ├── TXBM21-25_AlignedMasterTags.sai
+│   │   │   │   ├── TXBM21-25_AlignedMasterTags.sam
+│   │   │   │   └── TXBM21-25_MasterGBStags.fa.gz
+│   │   │   ├── database
+│   │   │   │   └── TXBM21-25.db
+│   │   │   ├── hapmap
+│   │   │   │   ├── TXBM21-251.hmp.txt
+│   │   │   │   ├── TXBM21-251.hmp.txt.gz
+│   │   │   │   ├── TXBM21-251.vcf
+│   │   │   │   └── TXBM21-252.json.gz
+│   │   │   ├── HDF5
+│   │   │   │   ├── TXBM21-25-KEY3_ReadsPerSample.log
+│   │   │   │   └── TXBM21-25_productioHapMap_noKO.h5
+│   │   │   ├── logs
+│   │   │   │   └── < 9 TASSEL GBS plugin .log files >
+│   │   │   ├── outputStats_uniqueTaxa.txt
+├── < 2 stderr.*.JOBID files >
+└── < 2 stdout.*.JOBID files >
+│   │   │   └── < 4 summary1-4.txt files >
+│   │   │   ├── TXBM21-25-KEY3.txt
+│   │   │   └── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3-log.txt
+│   │   ├── first_run
+│   │   │   ├── outputStats_uniqueTaxa.txt
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │   └── < 4 summary1-4.txt files >
+│   │   │   ├── TXBM21-25-KEY2.txt
+│   │   │   └── TXL21-25-Tassel5GBSv2_pipeline_Paulv3-log.txt
+│   │   ├── New_Key3
+│   │   │   ├── alignment
+│   │   │   │   ├── TXBM21-25_AlignedMasterTags.sai
+│   │   │   │   ├── TXBM21-25_AlignedMasterTags.sam
+│   │   │   │   └── TXBM21-25_MasterGBStags.fa.gz
+│   │   │   ├── database
+│   │   │   │   └── TXBM21-25.db
+│   │   │   ├── hapmap
+│   │   │   │   ├── TXBM21-251.hmp.txt
+│   │   │   │   ├── TXBM21-251.vcf
+│   │   │   │   ├── TXBM21-251.vcf.gz
+│   │   │   │   └── TXBM21-252.json.gz
+│   │   │   ├── HDF5
+│   │   │   │   ├── TXBM21-25-KEY2_ReadsPerSample.log
+│   │   │   │   └── TXBM21-25_productioHapMap_noKO.h5
+│   │   │   ├── logs
+│   │   │   │   └── < 9 TASSEL GBS plugin .log files >
+│   │   │   ├── outputStats_uniqueTaxa.txt
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │   └── < 4 summary1-4.txt files >
+│   │   │   ├── TXBM21-25-LINES.txt
+│   │   │   └── TXL21-25-Tassel5GBSv2_pipeline_Paulv3-log.txt
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   ├── TXBM24-Tassel5GBSv2_pipeline_Paulv3-log.txt
+│   │   └── TXL21-25-Tassel5GBSv2_pipeline_Paulv3-log.txt
+│   ├── Optimization
+│   │   ├── DOE-F0t1.csv
+│   │   ├── DOE-MLCprop.csv
+│   │   ├── DOE-UCB1-Candidates.csv
+│   │   ├── F0
+│   │   │   ├── DOE.csv
+│   │   │   ├── DOE-MLCprop.csv
+│   │   │   ├── F0-2_Logs
+│   │   │   │   ├── < 34 SOBOL-0 run .log files (1-39) >
+│   │   │   ├── F0-2_Summaries
+│   │   │   │   └── < 4 × TXBM21-25N.txt summary files >
+│   │   │   ├── F0_Logs
+│   │   │   │   ├── < 39 SOBOL-0 run .log files (1-39) >
+│   │   │   │   └── < Trial_ID.log >
+│   │   │   ├── F0_Logs.tar.gz
+│   │   │   ├── F0_Summaries
+│   │   │   │   └── < 4 × TXBM21-25N.txt summary files >
+├── < 2 stderr.*.JOBID files >
+└── < 2 stdout.*.JOBID files >
+│   │   ├── F0_Logs
+│   │   ├── F0_Summaries
+│   │   ├── F1.2_Logs
+│   │   │   ├── < 35 SOBOL-0 run .log files (1-40) >
+│   │   │   └── < 19 UCB-1 run .log files (38-57) >
+│   │   ├── F1.2_Summaries
+│   │   │   └── < 4 × TXBM21-25N.txt summary files >
+│   │   ├── F1_Logs
+│   │   │   └── < 20 UCB-1 run .log files (58-77) >
+│   │   ├── F1_Logs.tar.gz
+│   │   ├── F1_Summaries
+│   │   │   └── < 4 × TXBM21-25N.txt summary files >
+│   │   ├── F1_Summaries.tar.gz
+│   │   ├── logs
+│   │   │   ├── GridTest
+│   │   │   │   ├── RunLogs
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   │   │   └── < 16 GridTest parameter .log files >
+│   │   │   ├── SOBOL
+├── < 2 stderr.*.JOBID files >
+├── < 13 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 13 more stdout files >
+│   │   ├── Old_Scripts
+│   │   │   ├── parallel_t5_filter-v1.sh
+│   │   │   ├── run_filter.sh
+│   │   │   ├── run_filter.sh.save
+│   │   │   ├── setup_env.sh
+│   │   │   ├── setup_tassel_opt.sh
+│   │   │   ├── t5_filter.sh
+│   │   │   ├── t5_filter-v2.sh
+│   │   │   ├── t5_filter-v3.sh
+│   │   │   └── TasselFilterer-1.py
+│   │   ├── parallel_t5_filter-v2.sh
+│   │   ├── parallel_t5_filter-v3.sh
+│   │   ├── parallel_t5_filter-v4.sh
+├── < 2 stderr.*.JOBID files >
+└── < 2 stdout.*.JOBID files >
+│   │   ├── Summaries
+│   │   │   └── < 4 × TXBM21-25N.txt summary files >
+│   │   ├── TASSEL
+│   │   │   └── tassel-5-standalone
+│   │   │       ├── cp.bat
+│   │   │       ├── example_pipelines
+│   │   │       │   ├── glm_tutorial_config.xml
+│   │   │       │   ├── ld_all_config.xml
+│   │   │       │   ├── ld_site_by_all_config.xml
+│   │   │       │   └── mlm_tutorial_config.xml
+│   │   │       ├── lib
+│   │   │       │   ├── < 51 .jar library files >
+│   │   │       │   ├── enzymes.ini
+│   │   │       │   ├── libTasselBlas.dylib
+│   │   │       ├── run_anything.bat
+│   │   │       ├── run_anything.pl
+│   │   │       ├── run_pipeline.bat
+│   │   │       ├── run_pipeline.pl
+│   │   │       ├── start_tassel.bat
+│   │   │       ├── start_tassel.pl
+│   │   │       ├── < 1 .jar library files >
+│   │   │       ├── Tassel5PipelineCLI.pdf
+│   │   │       └── TASSELTutorialData
+│   │   │           └── data
+│   │   │               ├── d8_sequence.phy
+│   │   │               ├── mdp_genotype.hmp.txt
+│   │   │               ├── mdp_kinship.txt
+│   │   │               ├── mdp_phenotype.txt
+│   │   │               ├── mdp_population_structure.txt
+│   │   │               └── mdp_traits.txt
+│   │   ├── TXBM21-25_productioHapMap_noKO.h5
+│   │   └── TXBM21-25-raw.vcf.gz
+│   ├── outputStats_uniqueTaxa.txt
+│   ├── parallel_t5_filter-v4.sh
+│   ├── rsync_fastq.sh
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   └── < 4 summary1-4.txt files >
+│   ├── TX2021-TXE-AP-AA-STA-GBS_1_1.fastq.gz
+│   ├── TX2021-TXE-AP-AA-STA-GBS_2_1.fastq.gz
+│   ├── TXBM21-25-KEY4.txt
+│   ├── TXBM21-25-LINES-3.txt
+│   ├── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3-log.txt
+│   ├── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3.sh
+│   ├── TXL2022-GBS-P1-4-S1_1_1.fastq.gz
+│   ├── TXL2023-BL-Plates1-4-GBS-S1_1_1.fastq.gz
+│   ├── TXL2024-1to4-GBS-S1_1_1.fastq.gz
+│   ├── TXL2024-5to7-and-SDS-1-GBS-S1_1_1.fastq.gz
+│   ├── TXL2025GBS_1_1.fastq.gz
+│   └── TXL2025RPNGBS-J615_1_1.fastq.gz
+├── TXBM21-25_AAA
+│   ├── AddPolyA-new.sh
+│   ├── add_poly_As.sh
+│   ├── add_PolyATails-2.sh
+│   ├── add_PolyATails.sh
+│   ├── alignment
+│   │   ├── TXBM21-25_AAA_AlignedMasterTags.sai
+│   │   ├── TXBM21-25_AAA_AlignedMasterTags.sam
+│   │   └── TXBM21-25_AAA_MasterGBStags.fa.gz
+│   ├── Call_SNPs_launch.sh
+│   ├── database
+│   │   └── TXBM21-25_AAA.db
+│   ├── GENO_FILTER.sh
+│   ├── hapmap
+│   │   ├── TXBM21-25_AAA1.hmp.txt
+│   │   ├── TXBM21-25_AAA1.vcf
+│   │   └── TXBM21-25_AAA2.json.gz
+│   ├── HDF5
+│   │   ├── TXBM21-25_AAA_productioHapMap_noKO.h5
+│   │   └── TXBM21-25-PolyA-KEY_ReadsPerSample.log
+│   ├── iwgsc_refseqv2.1_assembly.fa
+│   └── < 5 BWA index files (.fa.amb/ann/bwt/pac/sa) >
+│   ├── logs
+│   │   └── < 9 TASSEL GBS plugin .log files >
+│   ├── movePolyA.sh
+│   ├── Optimization
+│   │   ├── DOE-MLCprop-PolyA.csv
+│   │   ├── DOE-PRELIM_SOBOL.csv
+│   │   ├── FAST_TXBM21-25.05geno_miss.h5
+│   │   ├── Job_Logs
+└── < 2 stdout.*.JOBID files >
+└── < 1 more stdout files >
+│   │   ├── Old_Scripts
+│   │   │   ├── parallel_t5_filter-prelim2.sh
+│   │   │   └── parallel_t5_filter-v4.sh
+│   │   ├── Opt_DataFrames
+│   │   │   ├── PRELIM-SOBOL-F0.csv
+│   │   │   └── Unspecified_Parsed_Logs
+│   │   ├── Opt_Logs
+│   │   │   ├── PolyA_F0_Logs.tar.gz
+│   │   │   ├── PRELIM_2295genos-F0_Logs
+│   │   │   │   └── < 19 PRELIM-SOBOL .log files (runs 1-19) >
+│   │   │   ├── PRELIM-SOBOL-F0_Logs
+│   │   │   │   └── < 39 PRELIM-SOBOL .log files (runs 1-39) >
+│   │   │   └── PRELIM-SOBOL-F0_Logs.tar.gz
+│   │   ├── Opt_Summaries
+│   │   │   ├── F0_Summaries
+│   │   │   │   └── < 4 × TXBM21-25N.txt summary files >
+│   │   │   ├── PRELIM_2295genos-F0_Summaries
+│   │   │   │   └── < 76 PRELIM-SOBOL summary .txt (runs 1-19) >
+│   │   │   ├── PRELIM-SOBOL-F0_Summaries
+│   │   │   │   └── < 156 PRELIM-SOBOL summary .txt (runs 1-39) >
+│   │   │   └── PRELIM-SOBOL-F0_Summaries.tar.gz
+│   │   ├── parallel_t5_filter-prelim3.sh
+├── < 1 stderr.*.JOBID files >
+└── < 1 stdout.*.JOBID files >
+│   │   ├── TXBM21-25_AAA_productioHapMap_noKO.h5
+│   │   └── Utils
+│   │       └── OutLogParser-Inline.py
+│   ├── outputStats_uniqueTaxa.txt
+│   ├── PolyA_FASTQ.tar.gz
+│   ├── PolyA_Logs
+├── < 2 stderr.*.JOBID files >
+├── < 7 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 6 more stdout files >
+│   ├── Pre-Imputation_Filtering
+│   │   ├── FAST_TXBM21-25.05geno_miss.h5
+│   │   ├── Logs
+├── < 1 stderr.*.JOBID files >
+└── < 2 stdout.*.JOBID files >
+└── < 1 more stdout files >
+│   │   ├── Summaries
+│   │   │   ├── 05geno_miss_TXBM21-251.txt
+│   │   │   ├── 05geno_miss_TXBM21-252.txt
+│   │   │   ├── 05geno_miss_TXBM21-253.txt
+│   │   │   ├── 05geno_miss_TXBM21-254.txt
+│   │   │   ├── TXBM21-25_genomiss05_MLC20_MAF05_HET015-Summary1.txt
+│   │   │   ├── TXBM21-25_genomiss05_MLC20_MAF05_HET015-Summary2.txt
+│   │   │   ├── TXBM21-25_genomiss05_MLC20_MAF05_HET015-Summary3.txt
+│   │   │   └── TXBM21-25_genomiss05_MLC20_MAF05_HET015-Summary4.txt
+│   │   └── VCF
+│   │       ├── json_outputs
+│   │       │   ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0152.json.gz
+│   │       │   ├── TXBM21-25--05geno_miss-MLC20-MAF05-HET0152.json.gz
+│   │       │   ├── TXBM21-25--geno_miss05-MLC20-MAF004-HET0152.json.gz
+│   │       │   └── TXBM21-25--geno_miss05-MLC30-MAF004-HET0152.json.gz
+│   │       ├── snp_positions_test.txt
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF01-HET0151.vcf.gz
+│   │       ├── TXBM21-25--05geno_miss-MLC20-MAF05-HET0151.vcf.gz
+│   │       ├── TXBM21-25--geno_miss05-MLC20-MAF004-HET0151.vcf.gz
+│   │       ├── TXBM21-25--geno_miss05-MLC30-MAF004-HET0151.vcf.gz
+│   │       ├── TXBM21-25--geno_miss05-MLC30-MAF04-HET0151.vcf
+│   │       ├── TXBM21-25--geno_miss05-MLC30-MAF04-HET0152.json.gz
+│   │       ├── TXBM21-25--geno_miss05-MLC35-MAF03-HET0151.vcf
+│   │       ├── TXBM21-25--geno_miss05-MLC35-MAF03-HET0152.json.gz
+│   │       ├── TXBM21-25--geno_miss05-MLC40-MAF03-HET0151.vcf
+│   │       └── TXBM21-25--geno_miss05-MLC40-MAF03-HET0152.json.gz
+│   ├── rsync_fastq.sh
+│   ├── SNP_FILTER.sh
+│   ├── SNP_FILTER-v2.sh
+│   ├── SNP_FILTER-v2.sh.save
+├── < 2 stderr.*.JOBID files >
+├── < 8 more stderr files >
+└── < 2 stdout.*.JOBID files >
+└── < 7 more stdout files >
+│   ├── TXBM21-25_AAA_productioHapMap_noKO.h5
+│   ├── TXBM21-25-LINES-3.txt
+│   ├── TXBM21-25-PolyA-KEY.txt
+│   ├── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3-log_03-03-2026.txt
+│   └── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3.sh
+└── TXBM21-26
+    ├── Logs
+    │   ├── cli_utils_logs
+    ├── < 1 stderr.*.JOBID files >
+    └── < 1 stdout.*.JOBID files >
+    │   └── SNPCalling_logs
+    ├── < 2 stderr.*.JOBID files >
+    └── < 2 stdout.*.JOBID files >
+    └── Scripts
+        ├── 1_SNPCalling
+        │   ├── AddPolyA-new.sh
+        │   ├── add_PolyATails-2.sh
+        │   ├── add_PolyATails-3.sh
+        │   ├── Call_SNPs_launch.sh
+        │   └── TXBM21-25_Tassel5GBSv2_pipeline_Paulv3.sh
+        ├── 2_Processing
+        │   ├── Filter-Impute.sh
+        │   ├── GENO_FILTER.sh
+        │   └── SNP_FILTER-v2.sh
+        └── cli_utils
+            ├── ExtractPolyA.sh
+            └── movePolyA.sh
+
+252 directories, 2600 files

@@ -1,0 +1,166 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.15",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "setup",
+      "code_hash": "7a01995c5e2aabd859ee4512c1eea0fb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hbol",
+      "code_hash": "cddb6b1ada0134ec0b0bf5d02ee8b11f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"setup\">Setup</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "4b978500801563d1f03206061d17a564",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"lines-file-functions\">\"LINES\" File Functions</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "9af3ab3d5b57f8a9689ea46d11c09f03",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "a3825bc6627670f31a19fd66c984a419",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"key-file-functions\">\"KEY\" File Functions</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "4b2696b5b493b6a23eb6071f49f0c729",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "5cf84a1c58868bf4a8b41b6a69a3ae6a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"execute\">Execute</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "2f7a13b5631c00f2fb1b84339e510801",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "WD: \n /home/lgw/TAMU/TXBM21-26/SNP_Pipeline/FASTQ_Metadata\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "ec3f5a450558f52971e42be5a3e6f02f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"update-lines-file\">Update \"LINES\" File</h2></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Current</strong> Num. Lines: 2295</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>TO ADD</strong> Num. Lines: 338</span></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Updated</strong> Num. Lines: 2629</span></span><span class=\"markdown prose dark:prose-invert contents\"><hr /></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><em>TXBM21-26_LINES-20260724_210705.txt saved to:</em> <br> /home/lgw/TAMU/TXBM21-26/SNP_Pipeline/FASTQ_Metadata/Updated Line Files/TXBM21-26_LINES-20260724_210705.txt</span></span><span class=\"markdown prose dark:prose-invert contents\"><hr /></span><marimo-ui-element object-id='SFPL-0' random-id='ee9ee452-da08-c761-3a2e-95890616ba40'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;_marimo_row_id&#92;&quot;:0,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2164&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:1,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2219&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:2,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2282&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:3,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2286&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:4,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2309&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:5,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2602&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:6,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2607&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:7,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX14M7088-18AZ530&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:8,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2080&#92;&quot;},{&#92;&quot;_marimo_row_id&#92;&quot;:9,&#92;&quot;&#92;u003cNAME&#92;u003e&#92;&quot;:&#92;&quot;TX18M2137&#92;&quot;}]&quot;' data-total-rows='2629' data-total-columns='1' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;&#92;u003cNAME&#92;u003e&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-selection='&quot;multi&quot;' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='true' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "ff767f5a63310a92d7c90bfa36a6406f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"update-key-file\">Update \"KEY\" file.</h2></span><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"updated-keys\">Updated keys.</h3></span><marimo-ui-element object-id='BYtC-1' random-id='1efa01e1-c3a2-704a-0fdc-1193419630ab'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;TGACGCCA&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2164&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;A&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;A01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;CAGATA&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2219&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;B&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;B01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;GAAGTG&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2282&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;C&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;C01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;TAGCGGAT&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2286&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;D&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;D01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;TATTCGCAT&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2309&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;E&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;E01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;ATAGAT&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2602&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;F&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;F01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;CCGAACA&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2607&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;G&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;G01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;GGAAGACAT&#92;&quot;,&#92;&quot;Column&#92;&quot;:1,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX14M7088-18AZ530&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;H&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;H01&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;GGCTTA&#92;&quot;,&#92;&quot;Column&#92;&quot;:2,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2080&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;A&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;A02&#92;&quot;},{&#92;&quot;Barcode&#92;&quot;:&#92;&quot;AACGCACATT&#92;&quot;,&#92;&quot;Column&#92;&quot;:2,&#92;&quot;Flowcell&#92;&quot;:&#92;&quot;AAAA-TX2021-TXE-AP-AA-STA-GBS&#92;&quot;,&#92;&quot;FullSampleName&#92;&quot;:&#92;&quot;TX18M2137&#92;&quot;,&#92;&quot;Lane&#92;&quot;:1,&#92;&quot;PlateName&#92;&quot;:&#92;&quot;1188-TX2021-GBS_001&#92;&quot;,&#92;&quot;Row&#92;&quot;:&#92;&quot;B&#92;&quot;,&#92;&quot;Well&#92;&quot;:&#92;&quot;B02&#92;&quot;}]&quot;' data-total-rows='2713' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;Barcode&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Column&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;Flowcell&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;FullSampleName&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Lane&quot;,[&quot;integer&quot;,&quot;int64&quot;]],[&quot;PlateName&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Row&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Well&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='true' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"key-file-column-comparison\">Key File Column Comparison</h3></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\"><strong>Common:</strong> 8 &nbsp;|&nbsp; <strong>Unique to TXBM26:</strong> 4 &nbsp;|&nbsp; <strong>Unique to TXBM21-25:</strong> 4</span></span><marimo-ui-element object-id='BYtC-0' random-id='a58cc401-939c-249b-4e29-2ebd03bbcf7a'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Barcode&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;BCNum&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;BarcodeName&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Column&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;BCSet&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;Discription&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Flowcell&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;FastqFile&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;OrigFastqFile&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;FullSampleName&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;SeqRun&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;SeqRunNum&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Lane&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;PlateName&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Row&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;&#92;&quot;},{&#92;&quot;Common Columns&#92;&quot;:&#92;&quot;Well&#92;&quot;,&#92;&quot;Columns Unique to TXBM26&#92;&quot;:&#92;&quot;&#92;&quot;,&#92;&quot;Columns Unique to TXBM21-25&#92;&quot;:&#92;&quot;&#92;&quot;}]&quot;' data-total-rows='8' data-total-columns='3' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-field-types='[[&quot;Common Columns&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Columns Unique to TXBM26&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;Columns Unique to TXBM21-25&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div></div>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "8 Columns in common: \n ['Barcode' 'Column' 'Flowcell' 'FullSampleName' 'Lane' 'PlateName' 'Row'\n 'Well']\n\n4 Columns in 'from_key' but NOT in 'to_key': \n ['BCNum' 'BCSet' 'FastqFile' 'SeqRun']\n\n4 Columns in 'to_key' but NOT in 'from_key': \n ['BarcodeName' 'Discription' 'OrigFastqFile' 'SeqRunNum']\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "RGSE",
+      "code_hash": null,
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}
