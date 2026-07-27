@@ -38,9 +38,15 @@ conda activate TASSEL
 
 #-------------------------------------------------------------------------------
 # Project Paths (sourced from config.env)
+#
+# PROJECT_ROOT is hardcoded here because SLURM copies this script to
+# /var/spool/ before execution, making $0-relative path resolution unreliable.
+# Keep this in sync with the #SBATCH --output/--error paths above.
 #-------------------------------------------------------------------------------
 
-CONFIG_ENV="$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")/config.env"
+PROJECT_ROOT="/scratch/group/genomic_predict/SNP_Calling/TXBM21-26"
+
+CONFIG_ENV="${PROJECT_ROOT}/config.env"
 if [[ ! -f "${CONFIG_ENV}" ]]; then
     echo "ERROR: config.env not found at ${CONFIG_ENV}"
     echo "       Copy config.env.template → config.env and fill in values."
