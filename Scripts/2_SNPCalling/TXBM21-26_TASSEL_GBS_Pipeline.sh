@@ -71,19 +71,19 @@ validate_paths() {
     
     log "Validating input paths..."
     
-    [[ -d "${DATA_ROOT}" ]] || { log "ERROR: DATA_ROOT not found: ${DATA_ROOT}"; ((errors++)); }
-    [[ -d "${FASTQ_DIR}" ]] || { log "ERROR: FASTQ_DIR not found: ${FASTQ_DIR}"; ((errors++)); }
-    [[ -d "${REF_GENOME_DIR}" ]] || { log "ERROR: REF_GENOME_DIR not found: ${REF_GENOME_DIR}"; ((errors++)); }
-    [[ -f "${RG}" ]] || { log "ERROR: Reference genome not found: ${RG}"; ((errors++)); }
-    [[ -f "${RG}.bwt" ]] || { log "ERROR: BWA index not found for: ${RG}"; ((errors++)); }
-    [[ -f "${DKF}" ]] || { log "ERROR: Discovery keyfile not found: ${DKF}"; ((errors++)); }
-    [[ -f "${PKF}" ]] || { log "ERROR: Production keyfile not found: ${PKF}"; ((errors++)); }
-    [[ -f "${TF}" ]] || { log "ERROR: Taxa file not found: ${TF}"; ((errors++)); }
+    [[ -d "${DATA_ROOT}" ]] || { log "ERROR: DATA_ROOT not found: ${DATA_ROOT}"; ((++errors)); }
+    [[ -d "${FASTQ_DIR}" ]] || { log "ERROR: FASTQ_DIR not found: ${FASTQ_DIR}"; ((++errors)); }
+    [[ -d "${REF_GENOME_DIR}" ]] || { log "ERROR: REF_GENOME_DIR not found: ${REF_GENOME_DIR}"; ((++errors)); }
+    [[ -f "${RG}" ]] || { log "ERROR: Reference genome not found: ${RG}"; ((++errors)); }
+    [[ -f "${RG}.bwt" ]] || { log "ERROR: BWA index not found for: ${RG}"; ((++errors)); }
+    [[ -f "${DKF}" ]] || { log "ERROR: Discovery keyfile not found: ${DKF}"; ((++errors)); }
+    [[ -f "${PKF}" ]] || { log "ERROR: Production keyfile not found: ${PKF}"; ((++errors)); }
+    [[ -f "${TF}" ]] || { log "ERROR: Taxa file not found: ${TF}"; ((++errors)); }
     
     # Check for FASTQ files
     local fastq_count
     fastq_count=$(find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) 2>/dev/null | wc -l)
-    [[ ${fastq_count} -gt 0 ]] || { log "ERROR: No FASTQ files found in: ${FASTQ_DIR}"; ((errors++)); }
+    [[ ${fastq_count} -gt 0 ]] || { log "ERROR: No FASTQ files found in: ${FASTQ_DIR}"; ((++errors)); }
     
     if [[ ${errors} -gt 0 ]]; then
         log "Validation failed with ${errors} error(s). Exiting."
@@ -112,10 +112,14 @@ print_config() {
     # List FASTQ files
     echo ""
     echo "  FASTQ files found:"
-    find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) -exec basename {} \; | head -10 | sed 's/^/    /'
-    local count
-    count=$(find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) | wc -l)
-    [[ ${count} -gt 10 ]] && echo "    ... and $((count - 10)) more"
+    if [[ -d "${FASTQ_DIR}" ]]; then
+        find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) -exec basename {} \; | head -10 | sed 's/^/    /'
+        local count
+        count=$(find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) | wc -l)
+        [[ ${count} -gt 10 ]] && echo "    ... and $((count - 10)) more"
+    else
+        echo "    ✘ FASTQ_DIR does not exist: ${FASTQ_DIR}"
+    fi
 }
 
 #-------------------------------------------------------------------------------
