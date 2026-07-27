@@ -35,7 +35,7 @@ else
 fi
 
 # Configure git identity
-git config user.name "Logan Wilson"
+git config user.name "LukeGW22"
 git config user.email "loganwilson@tamu.edu"
 
 # Set default branch name

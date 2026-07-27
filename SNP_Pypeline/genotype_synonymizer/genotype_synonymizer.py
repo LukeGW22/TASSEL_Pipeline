@@ -665,17 +665,26 @@ class GenotypeSynonymizer:
         """
         if not inplace:
             df = df.copy()
-        df[new_col] = df[name_col].apply(
-            lambda x: self._resolve(x) if pd.notna(x) else None
+
+        def _resolve_or_keep(x):
+            if pd.isna(x):
+                return None
+            resolved = self._resolve(x)
+            return resolved if resolved is not None else x
+
+        df[new_col] = df[name_col].apply(_resolve_or_keep)
+
+        n_total    = len(df)
+        n_null     = int(df[name_col].isna().sum())
+        n_resolved = int(
+            (df[new_col].notna() & (df[new_col] != df[name_col])).sum()
         )
-        n_missing = int(df[new_col].isna().sum())
-        if n_missing:
-            print(
-                f"  ⚠ {n_missing:,} of {len(df):,} names could not be "
-                f"standardized (no match in key file)."
-            )
-        else:
-            print(f"  ✓ All {len(df):,} names successfully standardized.")
+        n_kept     = n_total - n_null - n_resolved
+        print(
+            f"  ✓ {n_resolved:,} names standardized, "
+            f"{n_kept:,} kept as-is (no key match), "
+            f"{n_null:,} null."
+        )
         return df
 
     def get_aliases(self, preferred_name: str) -> List[str]:
