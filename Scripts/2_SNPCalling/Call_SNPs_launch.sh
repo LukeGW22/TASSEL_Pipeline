@@ -17,7 +17,7 @@
 #SBATCH --mem=250GB
 #SBATCH --output=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.out
 #SBATCH --error=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.err
-#SBATCH --account=132740983644
+#SBATCH --account=132740983163
 #SBATCH --mail-user=luke.whiteley@ag.tamu.edu
 #SBATCH --mail-type=ALL
 # NOTE: SLURM directives above cannot be dynamic. After sourcing config.env,
