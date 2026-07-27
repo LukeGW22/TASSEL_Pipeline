@@ -20,6 +20,8 @@
 #SBATCH --account=132740983644
 #SBATCH --mail-user=luke.whiteley@ag.tamu.edu
 #SBATCH --mail-type=ALL
+# NOTE: SLURM directives above cannot be dynamic. After sourcing config.env,
+#       the pipeline script reads all threshold/path variables from there.
 
 #-------------------------------------------------------------------------------
 # Environment Setup
@@ -35,10 +37,18 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate TASSEL
 
 #-------------------------------------------------------------------------------
-# Project Paths
+# Project Paths (sourced from config.env)
 #-------------------------------------------------------------------------------
 
-PROJECT_ROOT="/scratch/group/genomic_predict/SNP_Calling/TXBM21-26"
+CONFIG_ENV="$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")/config.env"
+if [[ ! -f "${CONFIG_ENV}" ]]; then
+    echo "ERROR: config.env not found at ${CONFIG_ENV}"
+    echo "       Copy config.env.template → config.env and fill in values."
+    exit 1
+fi
+# shellcheck source=/dev/null
+source "${CONFIG_ENV}"
+
 PIPELINE_SCRIPT="${PROJECT_ROOT}/Scripts/2_SNPCalling/TXBM21-26_TASSEL_GBS_Pipeline.sh"
 
 #-------------------------------------------------------------------------------

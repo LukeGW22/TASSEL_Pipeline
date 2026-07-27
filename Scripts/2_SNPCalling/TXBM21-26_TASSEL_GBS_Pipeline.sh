@@ -11,49 +11,20 @@
 set -euo pipefail  # Exit on error, undefined vars, pipe failures
 
 #-------------------------------------------------------------------------------
-# CONFIGURATION: Edit these variables for your project
+# CONFIGURATION: sourced from config.env (copy from config.env.template)
 #-------------------------------------------------------------------------------
 
-# Study identifier (used in output filenames)
-Study="TXBM21-26"
+CONFIG_FILE="${PROJECT_ROOT:-$(dirname "$(dirname "$(dirname "$0")")")}/config.env"
+if [[ ! -f "${CONFIG_FILE}" ]]; then
+    echo "ERROR: config.env not found at: ${CONFIG_FILE}"
+    echo "       Copy config.env.template → config.env and fill in values."
+    exit 1
+fi
+# shellcheck source=/dev/null
+source "${CONFIG_FILE}"
 
-# Root directories
-# On HPRC Grace: DATA_ROOT=$SCRATCH (90-day purge), PROJECT_ROOT=$WORK (longer retention)
-DATA_ROOT="/scratch/group/genomic_predict/Data"
-PROJECT_ROOT="/scratch/group/genomic_predict/SNP_Calling/${Study}"
-
-# Input directories (under DATA_ROOT - large immutable data)
-FASTQ_DIR="${DATA_ROOT}/PolyA_FASTQ"
-REF_GENOME_DIR="${DATA_ROOT}/Reference_Genomes"
-
-# Metadata directory (under PROJECT_ROOT - version controlled)
-METADATA_DIR="${PROJECT_ROOT}/GBS_Metadata"
-
-# Output directory (all pipeline outputs consolidated here)
-OUTPUT_DIR="${PROJECT_ROOT}/TASSEL_Workflow_Outputs"
-
-# Reference genome (select one)
-REF_GENOME="iwgsc_refseqv2.1_assembly.fa"
-RG="${REF_GENOME_DIR}/${REF_GENOME}"
-
-# Key and taxa files (use symlinks or explicit filenames)
-DKF="${METADATA_DIR}/current_key.txt"       # Discovery keyfile
-PKF="${METADATA_DIR}/current_key.txt"       # Production keyfile
-TF="${METADATA_DIR}/current_lines.txt"      # Taxa/LINES file
-
-# Enzyme (DO NOT CHANGE unless you know what you're doing)
-ENZYME="PstI-MspI"
-
-# SNP calling parameters
-MIN_READ_COUNT=1          # Minimum tag count across all taxa
-MIN_QUALITY_SCORE=0       # Keep 0 if using poly-A reads
-MIN_LOCUS_COVERAGE=0.20   # 0.2 = 80% missing allowed
-MIN_MINOR_ALLELE_FREQ=0.001
-
-# Resource allocation
-JAVA_MIN_MEM="10g"
-JAVA_MAX_MEM="150g"
-BWA_THREADS=24
+# Alias STUDY → Study for internal use
+Study="${STUDY}"
 
 #-------------------------------------------------------------------------------
 # DERIVED PATHS (no need to edit)
