@@ -116,7 +116,7 @@ print_config() {
         find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) -exec basename {} \; | head -10 | sed 's/^/    /'
         local count
         count=$(find "${FASTQ_DIR}" -maxdepth 1 \( -name "*.fastq" -o -name "*.fastq.gz" \) | wc -l)
-        [[ ${count} -gt 10 ]] && echo "    ... and $((count - 10)) more"
+        if [[ ${count} -gt 10 ]]; then echo "    ... and $((count - 10)) more"; fi
     else
         echo "    ✘ FASTQ_DIR does not exist: ${FASTQ_DIR}"
     fi
