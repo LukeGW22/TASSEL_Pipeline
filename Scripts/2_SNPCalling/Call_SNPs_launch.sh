@@ -11,10 +11,10 @@
 
 #SBATCH --export=NONE
 #SBATCH --job-name=TXBM21-26_Call_SNPs
-#SBATCH --time=24:00:00
+#SBATCH --time=2-00:00:00
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=24
-#SBATCH --mem=250GB
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=300GB
 #SBATCH --output=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.out
 #SBATCH --error=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/TASSEL_Workflow_Outputs/logs/%x.%j.err
 #SBATCH --account=132740983163
