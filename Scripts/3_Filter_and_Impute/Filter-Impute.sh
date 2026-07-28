@@ -53,7 +53,11 @@ source "${CONFIG_FILE}"
 
 module load Anaconda3/2024.02-1
 source "$(conda info --base)/etc/profile.d/conda.sh"
+# Conda's openjdk activate.d script references JAVA_HOME before setting it,
+# which trips set -u. Temporarily disable nounset around conda activate.
+set +u
 conda activate TASSEL
+set -u
 
 #-------------------------------------------------------------------------------
 # FILTER PARAMETERS — edit here
