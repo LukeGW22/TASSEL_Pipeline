@@ -16,6 +16,7 @@
 #===============================================================================
 # TASSEL Filter + BEAGLE Imputation (TXBM21-26)
 #
+# Stage 0: Remove UNKNOWN chromosome sites      (FilterSiteBuilderPlugin -chrFilter)
 # Stage 1: Remove taxa with >95% missing data   (FilterTaxaPropertiesPlugin)
 # Stage 2: Site filters — MLC=20, MAF=0.02      (FilterSiteBuilderPlugin)
 # Stage 3: Impute with BEAGLE default params
@@ -93,6 +94,7 @@ FILT_DIR="${PI_FILTER_DIR}/${PARAM_LABEL}"
 STEP_LOG_DIR="${FILT_DIR}/logs"   # TASSEL plugin logs; LOG_DIR (from config) is for SLURM job logs
 SUM_DIR="${FILT_DIR}/summaries"
 
+NO_UNK_H5="${FILT_DIR}/${Study}_no_unknown.h5"   # Stage 0 output: UNKNOWN chr removed
 GENO_FILT_H5="${FILT_DIR}/${Study}_geno95.h5"
 SITE_FILT_VCF="${FILT_DIR}/${Study}_${PARAM_LABEL}_filtered"
 
@@ -100,6 +102,32 @@ SITE_FILT_VCF="${FILT_DIR}/${Study}_${PARAM_LABEL}_filtered"
 IMP_VCF="${IMPUTE_DIR}/${Study}_${PARAM_LABEL}_IMPUTED"
 
 mkdir -p "${FILT_DIR}" "${STEP_LOG_DIR}" "${SUM_DIR}" "${IMPUTE_DIR}"
+
+#-------------------------------------------------------------------------------
+# STAGE 0: Remove UNKNOWN chromosome sites
+#-------------------------------------------------------------------------------
+
+echo ""
+echo "======================================================================"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 0: Remove UNKNOWN chromosome sites"
+echo "======================================================================"
+
+module purge
+module load GCC/13.2.0
+module load Java/1.8.0_292-OpenJDK
+
+"${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
+    -log "${STEP_LOG_DIR}/00_RemoveUnknown.log" \
+    -fork1 \
+    -h5 "${H5_IN}" \
+    -FilterSiteBuilderPlugin \
+    -chrFilter "1A,1B,1D,2A,2B,2D,3A,3B,3D,4A,4B,4D,5A,5B,5D,6A,6B,6D,7A,7B,7D" \
+    -endPlugin \
+    -export "${NO_UNK_H5}" \
+    -exportType HDF5 \
+    -runfork1
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] UNKNOWN chr removed: ${NO_UNK_H5}"
 
 #-------------------------------------------------------------------------------
 # STAGE 1: Filter taxa — drop genotypes with >95% missing data
@@ -110,14 +138,10 @@ echo "======================================================================"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1: Filter taxa (minNotMissing=${GENO_MIN_NOT_MISSING})"
 echo "======================================================================"
 
-module purge
-module load GCC/13.2.0
-module load Java/1.8.0_292-OpenJDK
-
 "${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
     -log "${STEP_LOG_DIR}/01_FilterTaxa.log" \
     -fork1 \
-    -h5 "${H5_IN}" \
+    -h5 "${NO_UNK_H5}" \
     -FilterTaxaPropertiesPlugin \
     -minNotMissing "${GENO_MIN_NOT_MISSING}" \
     -endPlugin \
