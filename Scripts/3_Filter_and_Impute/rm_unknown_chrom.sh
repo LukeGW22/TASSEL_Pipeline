@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --export=NONE
-#SBATCH --job-name=RM_UNK_CHROM
+#SBATCH --job-name=method_comparison_RM_UNK_CHROM_
 #SBATCH --time=03:00:00
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=5
@@ -37,10 +37,14 @@ STUDY="TXBM21-26"
 JAVA_MIN_MEM="10g"
 JAVA_MAX_MEM="140g"
 
+# Genotype missingness threshold for filtering taxa
+GENO_MIN_NOT_MISSING=0.05 
+
 #-------------------------------------------------------------------------------
 # Remove unknown chromosome
 #-------------------------------------------------------------------------------
 
+# 1-step pre-site filtering
 ${TASSEL} -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
     -fork1 \
     -h5 "${WD}/${H5_IN}" \
@@ -49,6 +53,32 @@ ${TASSEL} -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
         -startSite 0 \
         -endSite 2183031 \
         -endPlugin \
-    -export "${WD}/${STUDY}_NoChrUNK.h5" \
+    -FilterTaxaPropertiesPlugin \
+        -minNotMissing "${GENO_MIN_NOT_MISSING}" \
+        -endPlugin \
+    -export "${WD}/${STUDY}_chrunk_and_geno95_same_time.h5" \
+    -exportType HDF5 \
+    -runfork1
+
+# 2-step pre-site filtering method (first rm chr unknown, then filter taxa)
+${TASSEL} -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
+    -fork1 \
+    -h5 "${WD}/${H5_IN}" \
+    -FilterSiteBuilderPlugin \
+        -siteRangeFilterType SITES \
+        -startSite 0 \
+        -endSite 2183031 \
+        -endPlugin \
+    -export "${WD}/${STUDY}_chrunk_first.h5" \
+    -exportType HDF5 \
+    -runfork1
+
+${TASSEL} -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
+    -fork1 \
+    -h5 "${WD}/${STUDY}_chrunk_first.h5" \
+    -FilterTaxaPropertiesPlugin \
+    -minNotMissing "${GENO_MIN_NOT_MISSING}" \
+        -endPlugin \
+    -export "${WD}/${STUDY}_chrunk_first_geno95.h5" \
     -exportType HDF5 \
     -runfork1
