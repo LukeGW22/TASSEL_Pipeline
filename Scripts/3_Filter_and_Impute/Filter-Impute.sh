@@ -16,8 +16,7 @@
 #===============================================================================
 # TASSEL Filter + BEAGLE Imputation (TXBM21-26)
 #
-# Stage 0: Remove UNKNOWN chromosome sites      (FilterSiteBuilderPlugin -chrFilter)
-# Stage 1: Remove taxa with >95% missing data   (FilterTaxaPropertiesPlugin)
+# Stage 1: Remove UNKNOWN chromosome sites & taxa with >95% missing data   (FilterSiteBuilderPlugin + FilterTaxaPropertiesPlugin)
 # Stage 2: Site filters — MLC=20, MAF=0.02      (FilterSiteBuilderPlugin)
 # Stage 3: Impute with BEAGLE default params
 # Stage 4: Genotype summary on imputed VCF
@@ -64,11 +63,13 @@ set -u
 # FILTER PARAMETERS — edit here
 #-------------------------------------------------------------------------------
 
-GENO_MIN_NOT_MISSING=0.05   # Minimum non-missing fraction per taxon (0.05 → drop >95% missing)
+GENO_MIN_NOT_MISSING=0.05    # Minimum non-missing fraction per taxon (0.05 → drop >95% missing)
 MLC_FRACTION=0.20            # MLC = this fraction × number of taxa passing the geno filter
 MAF=0.02                     # Minimum minor allele frequency
 MAX_HET=0.0156               # Maximum heterozygosity per site
-PARAM_LABEL="geno95_MLC20pct_MAF02"
+PARAM_LABEL="geno95_MLC20_MAF02"
+START_SITE=0                 # start site for Chr 1A (usually 0)
+END_SITE=2695770             # end site for Chr 7D.
 
 # Java heap for the filtering stages — larger than the config default to handle
 # the full in-memory genotype matrix during FilterTaxa and FilterSites.
@@ -104,62 +105,39 @@ IMP_VCF="${IMPUTE_DIR}/${Study}_${PARAM_LABEL}_IMPUTED"
 mkdir -p "${FILT_DIR}" "${STEP_LOG_DIR}" "${SUM_DIR}" "${IMPUTE_DIR}"
 
 #-------------------------------------------------------------------------------
-# STAGE 0: Remove UNKNOWN chromosome sites
+# STAGE 1: Remove UNKNOWN chromosome sites & drop taxa with >95% missing data
 #-------------------------------------------------------------------------------
-
 echo ""
-echo "======================================================================"
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 0: Remove UNKNOWN chromosome sites"
-echo "======================================================================"
+echo "================================================================================================================="
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] STAGE 1: Remove UNKNOWN chromosome sites & drop taxa with >95% missing data"
+echo "================================================================================================================="
 
 module purge
 module load GCC/13.2.0
 module load Java/1.8.0_292-OpenJDK
 
-"${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
-    -log "${STEP_LOG_DIR}/00_RemoveUnknown.log" \
+"${TASSEL}" -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
     -fork1 \
     -h5 "${H5_IN}" \
     -FilterSiteBuilderPlugin \
-    -siteRangeFilterType POSITIONS \
-    -startChr 1A \
-    -startPos 0 \
-    -endChr 7D \
-    -endPos 1000000000 \
-    -endPlugin \
-    -export "${NO_UNK_H5}" \
-    -exportType HDF5 \
-    -runfork1
-
-# TASSEL exits 0 even on plugin errors — verify output was actually created.
-if [[ ! -f "${NO_UNK_H5}" ]]; then
-    echo "ERROR: Stage 0 failed — ${NO_UNK_H5} was not created."
-    echo "       Check ${STEP_LOG_DIR}/00_RemoveUnknown.log for details."
-    exit 1
-fi
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] UNKNOWN chr removed: ${NO_UNK_H5}"
-
-#-------------------------------------------------------------------------------
-# STAGE 1: Filter taxa — drop genotypes with >95% missing data
-#-------------------------------------------------------------------------------
-
-echo ""
-echo "======================================================================"
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1: Filter taxa (minNotMissing=${GENO_MIN_NOT_MISSING})"
-echo "======================================================================"
-
-"${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
-    -log "${STEP_LOG_DIR}/01_FilterTaxa.log" \
-    -fork1 \
-    -h5 "${NO_UNK_H5}" \
+        -siteRangeFilterType SITES \
+        -startSite "${START_SITE}" \
+        -endSite "${END_SITE}" \
+        -endPlugin \
     -FilterTaxaPropertiesPlugin \
-    -minNotMissing "${GENO_MIN_NOT_MISSING}" \
-    -endPlugin \
+        -minNotMissing "${GENO_MIN_NOT_MISSING}" \
+        -endPlugin \
     -export "${GENO_FILT_H5}" \
     -exportType HDF5 \
     -runfork1
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Taxa filtering complete: ${GENO_FILT_H5}"
+# TASSEL exits 0 even on plugin errors — verify output was actually created.
+if [[ ! -f "${GENO_FILT_H5}" ]]; then
+    echo "ERROR: Stage 1 failed — ${GENO_FILT_H5} was not created."
+    echo "       Check TASSEL log output above for details."
+    exit 1
+fi
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1 complete: ${GENO_FILT_H5}"
 
 # Count surviving taxa and compute MLC = ceil(taxa * MLC_FRACTION)
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Counting taxa to compute MLC..."
