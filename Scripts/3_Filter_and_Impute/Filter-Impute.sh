@@ -121,12 +121,22 @@ module load Java/1.8.0_292-OpenJDK
     -fork1 \
     -h5 "${H5_IN}" \
     -FilterSiteBuilderPlugin \
-    -chrFilter "1A,1B,1D,2A,2B,2D,3A,3B,3D,4A,4B,4D,5A,5B,5D,6A,6B,6D,7A,7B,7D" \
+    -siteRangeFilterType POSITIONS \
+    -startChr 1A \
+    -startPos 0 \
+    -endChr 7D \
+    -endPos 1000000000 \
     -endPlugin \
     -export "${NO_UNK_H5}" \
     -exportType HDF5 \
     -runfork1
 
+# TASSEL exits 0 even on plugin errors — verify output was actually created.
+if [[ ! -f "${NO_UNK_H5}" ]]; then
+    echo "ERROR: Stage 0 failed — ${NO_UNK_H5} was not created."
+    echo "       Check ${STEP_LOG_DIR}/00_RemoveUnknown.log for details."
+    exit 1
+fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] UNKNOWN chr removed: ${NO_UNK_H5}"
 
 #-------------------------------------------------------------------------------
