@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --export=NONE
 #SBATCH --job-name=TXBM21-26_filter_impute
-#SBATCH --time=8:00:00
+#SBATCH --time=16:00:00
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=48
 #SBATCH --mem=300GB
@@ -95,7 +95,8 @@ FILT_DIR="${PI_FILTER_DIR}/${PARAM_LABEL}"
 STEP_LOG_DIR="${FILT_DIR}/logs"   # TASSEL plugin logs; LOG_DIR (from config) is for SLURM job logs
 SUM_DIR="${FILT_DIR}/summaries"
 
-GENO_FILT_H5="${FILT_DIR}/${Study}_geno95.h5"
+GENO_QC1_FILT_H5="${FILT_DIR}/${Study}_snpQC_all_genotypes.h5"
+GENO_QC2_FILT_H5="${FILT_DIR}/${Study}_geno95.h5"
 SITE_FILT_VCF="${FILT_DIR}/${Study}_${PARAM_LABEL}_filtered"
 
 # Imputation outputs → IMPUTE_DIR from config.env
@@ -119,6 +120,7 @@ module purge
 module load GCC/13.2.0
 module load Java/1.8.0_292-OpenJDK
 
+# STAGE 1.a: QUALITY CONTROL - sites
 "${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
     -fork1 \
     -h5 "${H5_IN}" \
@@ -130,30 +132,46 @@ module load Java/1.8.0_292-OpenJDK
         -removeMinorSNPStates true \
         -removeSitesWithIndels true \
         -endPlugin \
-    -FilterTaxaPropertiesPlugin \
-        -minNotMissing "${GENO_MIN_NOT_MISSING}" \
-        -endPlugin \
-    -export "${GENO_FILT_H5}" \
+    -export "${GENO_QC1_FILT_H5}" \
     -exportType HDF5 \
     -runfork1
 
 # TASSEL exits 0 even on plugin errors — verify output was actually created.
-if [[ ! -f "${GENO_FILT_H5}" ]]; then
-    echo "ERROR: Stage 1 failed — ${GENO_FILT_H5} was not created."
+if [[ ! -f "${GENO_QC1_FILT_H5}" ]]; then
+    echo "ERROR: Stage 1.a failed — ${GENO_QC1_FILT_H5} was not created."
     echo "       Check TASSEL log output above for details."
     exit 1
 fi
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1 complete: ${GENO_FILT_H5}"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1.a complete: ${GENO_QC1_FILT_H5}"
+
+# STAGE 1.b: QUALITY CONTROL - taxa
+"${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
+    -fork1 \
+    -h5 "${GENO_QC1_FILT_H5}" \
+    -FilterTaxaPropertiesPlugin \
+        -minNotMissing "${GENO_MIN_NOT_MISSING}" \
+        -endPlugin \
+    -export "${GENO_QC2_FILT_H5}" \
+    -exportType HDF5 \
+    -runfork1
+
+# TASSEL exits 0 even on plugin errors — verify output was actually created.
+if [[ ! -f "${GENO_QC2_FILT_H5}" ]]; then
+    echo "ERROR: Stage 1.b failed — ${GENO_QC2_FILT_H5} was not created."
+    echo "       Check TASSEL log output above for details."
+    exit 1
+fi
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1.b complete: ${GENO_QC2_FILT_H5}"
 
 # Count surviving taxa and compute MLC = ceil(taxa * MLC_FRACTION)
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Counting taxa to compute MLC..."
 TAXA_SUMMARY="${FILT_DIR}/.taxa_count"
 "${TASSEL}" -Xms1g -Xmx4g \
     -fork1 \
-    -h5 "${GENO_FILT_H5}" \
+    -h5 "${GENO_QC2_FILT_H5}" \
     -GenotypeSummaryPlugin \
-    -overview true \
-    -endPlugin \
+        -overview true \
+        -endPlugin \
     -export "${TAXA_SUMMARY}" \
     -runfork1
 
@@ -193,17 +211,22 @@ echo "======================================================================"
 "${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
     -log "${STEP_LOG_DIR}/02_FilterSites.log" \
     -fork1 \
-    -h5 "${GENO_FILT_H5}" \
-    -FilterSiteBuilderPlugin \
-    -siteMinCount "${MLC}" \
-    -siteMinAlleleFreq "${MAF}" \
-    -siteMaxAlleleFreq 1.0 \
-    -endPlugin \
+    -h5 "${GENO_QC2_FILT_H5}" \
+        -FilterSiteBuilderPlugin \
+        -siteMinCount "${MLC}" \
+        -siteMinAlleleFreq "${MAF}" \
+        -siteMaxAlleleFreq 1.0 \
+        -endPlugin \
     -homozygous \
     -export "${SITE_FILT_VCF}" \
     -exportType VCF \
     -runfork1
 
+if [[ ! -f "${SITE_FILT_VCF}.vcf" ]]; then
+    echo "ERROR: Stage 2 failed — ${SITE_FILT_VCF}.vcf was not created."
+    echo "       Check ${STEP_LOG_DIR}/02_FilterSites.log for details."
+    exit 1
+fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Site filtering complete: ${SITE_FILT_VCF}.vcf"
 
 #-------------------------------------------------------------------------------
