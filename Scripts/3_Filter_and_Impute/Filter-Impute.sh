@@ -7,7 +7,7 @@
 #SBATCH --mem=300GB
 #SBATCH --output=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/Logs/%x.%j.out
 #SBATCH --error=/scratch/group/genomic_predict/SNP_Calling/TXBM21-26/Logs/%x.%j.err
-#SBATCH --account=132740983644
+#SBATCH --account=132740983163
 #SBATCH --mail-user=luke.whiteley@ag.tamu.edu
 #SBATCH --mail-type=all
 # NOTE: Logs directory must exist before submitting:
@@ -67,7 +67,7 @@ GENO_MIN_NOT_MISSING=0.05    # Minimum non-missing fraction per taxon (0.05 → 
 MLC_FRACTION=0.20            # MLC = this fraction × number of taxa passing the geno filter
 MAF=0.02                     # Minimum minor allele frequency
 MAX_HET=0.0156               # Maximum heterozygosity per site
-PARAM_LABEL="geno95_MLC20_MAF02"
+PARAM_LABEL="geno95_MLC20_MAF02_qc_first"
 START_SITE=0                 # start site for Chr 1A (usually 0)
 END_SITE=2695770             # end site for Chr 7D.
 
@@ -123,6 +123,9 @@ module load Java/1.8.0_292-OpenJDK
         -siteRangeFilterType SITES \
         -startSite "${START_SITE}" \
         -endSite "${END_SITE}" \
+        -maxHeterozygous "${MAX_HET}" \
+        -removeMinorSNPStates true \
+        -removeSitesWithIndels true \
         -endPlugin \
     -FilterTaxaPropertiesPlugin \
         -minNotMissing "${GENO_MIN_NOT_MISSING}" \
