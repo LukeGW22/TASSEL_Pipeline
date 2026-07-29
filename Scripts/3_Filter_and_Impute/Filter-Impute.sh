@@ -105,7 +105,11 @@ IMP_VCF="${IMPUTE_DIR}/${Study}_${PARAM_LABEL}_IMPUTED"
 mkdir -p "${FILT_DIR}" "${STEP_LOG_DIR}" "${SUM_DIR}" "${IMPUTE_DIR}"
 
 #-------------------------------------------------------------------------------
-# STAGE 1: Remove UNKNOWN chromosome sites & drop taxa with >95% missing data
+# STAGE 1: QUALITY CONTROL
+# 1. Remove UNKNOWN chromosome sites
+# 2. Drop SNPs with >1.56% heterozygosity
+# 3. Drop monomorphs/multialleles/indels
+# 4. Drop taxa with >95% missing data
 #-------------------------------------------------------------------------------
 echo ""
 echo "================================================================================================================="
@@ -152,14 +156,34 @@ TAXA_SUMMARY="${FILT_DIR}/.taxa_count"
     -overview true \
     -endPlugin \
     -export "${TAXA_SUMMARY}" \
-    -runfork1 > /dev/null 2>&1
-TAXA_COUNT=$(awk -F'\t' '/^Number of Taxa/{print $2}' "${TAXA_SUMMARY}1_GenotypeSummary.txt")
-# ceiling( taxa * fraction ) via bc
-MLC=$(echo "scale=0; (${TAXA_COUNT} * ${MLC_FRACTION} + 0.9999) / 1" | bc)
+    -runfork1
+
+# TASSEL appends something like "1_GenotypeSummary.txt" to the export prefix;
+# use a glob so this works regardless of exact suffix.
+SUMMARY_FILE=$(ls "${TAXA_SUMMARY}"*GenotypeSummary* 2>/dev/null | head -1)
+if [[ -z "${SUMMARY_FILE}" || ! -f "${SUMMARY_FILE}" ]]; then
+    echo "ERROR: GenotypeSummary file not found matching ${TAXA_SUMMARY}*GenotypeSummary*"
+    echo "       Files in ${FILT_DIR}:"
+    ls "${FILT_DIR}"/
+    exit 1
+fi
+
+TAXA_COUNT=$(awk -F'\t' '/Number of Taxa/{print $2; exit}' "${SUMMARY_FILE}")
+
+if [[ -z "${TAXA_COUNT}" || ! "${TAXA_COUNT}" =~ ^[0-9]+$ ]]; then
+    echo "ERROR: Could not parse taxa count from ${SUMMARY_FILE}."
+    echo "       File contents:"
+    head -5 "${SUMMARY_FILE}"
+    exit 1
+fi
+
+# ceiling( taxa * fraction ) via awk (avoids bc hanging on empty/non-numeric input)
+MLC=$(awk -v taxa="${TAXA_COUNT}" -v frac="${MLC_FRACTION}" \
+    'BEGIN { mlc = taxa * frac; print (mlc == int(mlc)) ? int(mlc) : int(mlc) + 1 }')
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Taxa after geno filter: ${TAXA_COUNT}  →  MLC = ${MLC} (${MLC_FRACTION} × ${TAXA_COUNT})"
 
 #-------------------------------------------------------------------------------
-# STAGE 2: Filter sites — MLC=20% of filtered taxa, MAF=0.02, remove monomorphs/multialleles/indels, set hets to missing
+# STAGE 2: Filter sites — MLC=20% of filtered taxa, MAF=0.02, set hets to missing
 #-------------------------------------------------------------------------------
 
 echo ""
@@ -175,9 +199,6 @@ echo "======================================================================"
     -siteMinCount "${MLC}" \
     -siteMinAlleleFreq "${MAF}" \
     -siteMaxAlleleFreq 1.0 \
-    -maxHeterozygous "${MAX_HET}" \
-    -removeMinorSNPStates true \
-    -removeSitesWithIndels true \
     -endPlugin \
     -homozygous \
     -export "${SITE_FILT_VCF}" \
