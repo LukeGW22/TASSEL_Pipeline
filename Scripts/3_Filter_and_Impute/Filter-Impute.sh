@@ -95,7 +95,6 @@ FILT_DIR="${PI_FILTER_DIR}/${PARAM_LABEL}"
 STEP_LOG_DIR="${FILT_DIR}/logs"   # TASSEL plugin logs; LOG_DIR (from config) is for SLURM job logs
 SUM_DIR="${FILT_DIR}/summaries"
 
-NO_UNK_H5="${FILT_DIR}/${Study}_no_unknown.h5"   # Stage 0 output: UNKNOWN chr removed
 GENO_FILT_H5="${FILT_DIR}/${Study}_geno95.h5"
 SITE_FILT_VCF="${FILT_DIR}/${Study}_${PARAM_LABEL}_filtered"
 
@@ -120,7 +119,7 @@ module purge
 module load GCC/13.2.0
 module load Java/1.8.0_292-OpenJDK
 
-"${TASSEL}" -Xms${JAVA_MIN_MEM} -Xmx${JAVA_MAX_MEM} \
+"${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
     -fork1 \
     -h5 "${H5_IN}" \
     -FilterSiteBuilderPlugin \
