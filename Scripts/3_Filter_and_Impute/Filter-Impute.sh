@@ -51,13 +51,13 @@ source "${CONFIG_FILE}"
 # ENVIRONMENT SETUP (must happen after config is sourced so CONDA_PREFIX is set)
 #-------------------------------------------------------------------------------
 
-module load Anaconda3/2024.02-1
-source "$(conda info --base)/etc/profile.d/conda.sh"
+#module load Anaconda3/2024.02-1
+#source "$(conda info --base)/etc/profile.d/conda.sh"
 # Conda's openjdk activate.d script references JAVA_HOME before setting it,
 # which trips set -u. Temporarily disable nounset around conda activate.
-set +u
-conda activate TASSEL
-set -u
+#set +u
+#conda activate TASSEL
+#set -u
 
 #-------------------------------------------------------------------------------
 # FILTER PARAMETERS — edit here
@@ -96,7 +96,7 @@ STEP_LOG_DIR="${FILT_DIR}/logs"   # TASSEL plugin logs; LOG_DIR (from config) is
 SUM_DIR="${FILT_DIR}/summaries"
 
 GENO_QC1_FILT_H5="${FILT_DIR}/${Study}_snpQC_all_genotypes.h5"
-GENO_QC2_FILT_H5="${FILT_DIR}/${Study}_geno95.h5"
+GENO_QC2_FILT_H5="${FILT_DIR}/${Study}_QC_geno95.h5"
 SITE_FILT_VCF="${FILT_DIR}/${Study}_${PARAM_LABEL}_filtered"
 
 # Imputation outputs → IMPUTE_DIR from config.env
@@ -145,6 +145,10 @@ fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1.a complete: ${GENO_QC1_FILT_H5}"
 
 # STAGE 1.b: QUALITY CONTROL - taxa
+# Tee stdout to a log so we can parse the taxa count TASSEL prints when writing HDF5:
+#   "Number of taxa in HDF5 file:<N>"
+# This avoids a separate GenotypeSummaryPlugin invocation (and the fragile file-glob parsing).
+STAGE1B_LOG="${STEP_LOG_DIR}/01b_FilterTaxa.log"
 "${TASSEL}" -Xms${FILTER_JAVA_MIN_MEM} -Xmx${FILTER_JAVA_MAX_MEM} \
     -fork1 \
     -h5 "${GENO_QC1_FILT_H5}" \
@@ -153,44 +157,22 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1.a complete: ${GENO_QC1_FILT_H5}"
         -endPlugin \
     -export "${GENO_QC2_FILT_H5}" \
     -exportType HDF5 \
-    -runfork1
+    -runfork1 2>&1 | tee "${STAGE1B_LOG}"
 
 # TASSEL exits 0 even on plugin errors — verify output was actually created.
 if [[ ! -f "${GENO_QC2_FILT_H5}" ]]; then
     echo "ERROR: Stage 1.b failed — ${GENO_QC2_FILT_H5} was not created."
-    echo "       Check TASSEL log output above for details."
+    echo "       Check ${STAGE1B_LOG} for details."
     exit 1
 fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Stage 1.b complete: ${GENO_QC2_FILT_H5}"
 
-# Count surviving taxa and compute MLC = ceil(taxa * MLC_FRACTION)
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Counting taxa to compute MLC..."
-TAXA_SUMMARY="${FILT_DIR}/.taxa_count"
-"${TASSEL}" -Xms1g -Xmx4g \
-    -fork1 \
-    -h5 "${GENO_QC2_FILT_H5}" \
-    -GenotypeSummaryPlugin \
-        -overview true \
-        -endPlugin \
-    -export "${TAXA_SUMMARY}" \
-    -runfork1
-
-# TASSEL appends something like "1_GenotypeSummary.txt" to the export prefix;
-# use a glob so this works regardless of exact suffix.
-SUMMARY_FILE=$(ls "${TAXA_SUMMARY}"*GenotypeSummary* 2>/dev/null | head -1)
-if [[ -z "${SUMMARY_FILE}" || ! -f "${SUMMARY_FILE}" ]]; then
-    echo "ERROR: GenotypeSummary file not found matching ${TAXA_SUMMARY}*GenotypeSummary*"
-    echo "       Files in ${FILT_DIR}:"
-    ls "${FILT_DIR}"/
-    exit 1
-fi
-
-TAXA_COUNT=$(awk -F'\t' '/Number of Taxa/{print $2; exit}' "${SUMMARY_FILE}")
+# Parse taxa count from Stage 1.b output — TASSEL prints "Number of taxa in HDF5 file:<N>"
+TAXA_COUNT=$(grep -oP '(?<=Number of taxa in HDF5 file:)\d+' "${STAGE1B_LOG}" | tail -1)
 
 if [[ -z "${TAXA_COUNT}" || ! "${TAXA_COUNT}" =~ ^[0-9]+$ ]]; then
-    echo "ERROR: Could not parse taxa count from ${SUMMARY_FILE}."
-    echo "       File contents:"
-    head -5 "${SUMMARY_FILE}"
+    echo "ERROR: Could not parse taxa count from ${STAGE1B_LOG}."
+    echo "       Expected a line matching 'Number of taxa in HDF5 file:<N>'."
     exit 1
 fi
 
